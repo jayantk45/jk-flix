@@ -28,6 +28,12 @@
 - Update store with Trailler Video Data.
 - Embedded the youtube video and made it mute and autoplay.
 - Made MainContiner beautiful with Tailwind.
+- Build Secondary Component
+- Build Movie List
+- Built Movie Card
+- TMDB image CDN URL
+- Made the browse page amazing with Tailwind CSS
+- Made all Genres custom Hooks and displayed them
 
 # Features
 
