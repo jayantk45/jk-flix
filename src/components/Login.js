@@ -1,27 +1,25 @@
 import React, { useRef, useState } from "react";
 import Header from "./Header";
 import { checkValidData } from "../utils/validate";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../utils/firebase"
-import { useNavigate } from "react-router-dom";
+import {
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+} from "firebase/auth";
+import { auth } from "../utils/firebase";
 import { updateProfile } from "firebase/auth";
-
+import { USER_AVATAR } from "../utils/constants"
 
 const Login = () => {
-
     const [isSignInForm, setIsSignInForm] = useState(true);
     const [errorMessage, setErrorMessage] = useState(null);
 
-    const navigate = useNavigate()
 
-
-    const name = useRef(null)
+    const name = useRef(null);
     const email = useRef(null);
     const password = useRef(null);
 
     const handleButtonClick = () => {
-
-        const message = checkValidData(email.current.value, password.current.value)
+        const message = checkValidData(email.current.value, password.current.value);
         setErrorMessage(message);
 
         if (message) return;
@@ -30,37 +28,42 @@ const Login = () => {
 
         if (!isSignInForm) {
             // Sign Up logic (firebase code with some modifications)
-            createUserWithEmailAndPassword(auth, email.current.value, password.current.value)
+            createUserWithEmailAndPassword(
+                auth,
+                email.current.value,
+                password.current.value
+            )
                 .then((userCredential) => {
-                    // Signed in 
+                    // Signed in
                     const user = userCredential.user;
 
                     updateProfile(user, {
-                        displayName: name.current.value, photoURL: "https://avatars.githubusercontent.com/u/109529041?v=4",
-                    }).then(() => {
-                        // Profile updated!
-
-                        navigate("/browse")
-                    }).catch((error) => {
-                        // An error occurred
-                        setErrorMessage(error.message);
-                    });
+                        displayName: name.current.value,
+                        photoURL: USER_AVATAR
+                    })
+                        .then(() => {
+                            // Profile updated!
+                        })
+                        .catch((error) => {
+                            // An error occurred
+                            setErrorMessage(error.message);
+                        });
                 })
                 .catch((error) => {
                     const errorCode = error.code;
                     const errorMessage = error.message;
-                    setErrorMessage(errorCode + "-" + errorMessage)
+                    setErrorMessage(errorCode + "-" + errorMessage);
                 });
-
-        }
-        else {
+        } else {
             // Sign in logic (firebase code with some modifications)
-            signInWithEmailAndPassword(auth, email.current.value, password.current.value)
+            signInWithEmailAndPassword(
+                auth,
+                email.current.value,
+                password.current.value
+            )
                 .then((userCredential) => {
-                    // Signed in 
+                    // Signed in
                     const user = userCredential.user;
-                    console.log(user);
-                    navigate("/browse")
                 })
                 .catch((error) => {
                     const errorCode = error.code;
@@ -68,12 +71,11 @@ const Login = () => {
                     setErrorMessage(errorCode + "-" + errorMessage);
                 });
         }
-    }
+    };
 
     const toggleSignInForm = () => {
         setIsSignInForm(!isSignInForm);
-    }
-
+    };
 
     return (
         <div>
@@ -86,42 +88,57 @@ const Login = () => {
                 />
             </div>
 
-            <form onSubmit={(e) => e.preventDefault()} className=" relative mx-auto right-0 left-0 top-28 w-3/12  p-12 bg-black text-white rounded-lg bg-opacity-75">
-                <h1 className=" font-bold text-3xl py-4 text-white">{isSignInForm ? ("Sign In") : ("Sign Up")}</h1>
+            <form
+                onSubmit={(e) => e.preventDefault()}
+                className=" relative mx-auto right-0 left-0 top-28 w-3/12  p-12 bg-black text-white rounded-lg bg-opacity-75"
+            >
+                <h1 className=" font-bold text-3xl py-4 text-white">
+                    {isSignInForm ? "Sign In" : "Sign Up"}
+                </h1>
 
-                {!isSignInForm &&
+                {!isSignInForm && (
                     <input
                         ref={name}
                         type="text"
                         placeholder="Full Name"
                         className=" p-4 my-4 w-full bg-gray-700"
-
                     />
-                }
+                )}
 
                 <input
                     ref={email}
                     type="email"
                     placeholder="Email Address"
                     className=" p-4 my-4 w-full bg-gray-700"
-
                 />
                 <input
                     ref={password}
                     type="password"
                     placeholder="Password"
                     className=" p-4 my-4 w-full bg-gray-700"
-
                 />
 
                 <p className=" text-red-600">{errorMessage}</p>
 
-                <button className=" p-4 my-6 bg-red-700 text-white w-full rounded-lg" onClick={handleButtonClick}>{isSignInForm ? ("Sign In") : ("Sign Up")}</button>
+                <button
+                    className=" p-4 my-6 bg-red-700 text-white w-full rounded-lg"
+                    onClick={handleButtonClick}
+                >
+                    {isSignInForm ? "Sign In" : "Sign Up"}
+                </button>
 
                 <div className=" text-white py-4 " onClick={toggleSignInForm}>
-                    {
-                        isSignInForm ? (<p>New to Netflix? <span className=" cursor-pointer underline">Sign Up</span> Now</p>) : (<p>Already registered? <span className=" cursor-pointer underline">Sign In</span> Now</p>)
-                    }
+                    {isSignInForm ? (
+                        <p>
+                            New to Netflix?{" "}
+                            <span className=" cursor-pointer underline">Sign Up</span> Now
+                        </p>
+                    ) : (
+                        <p>
+                            Already registered?{" "}
+                            <span className=" cursor-pointer underline">Sign In</span> Now
+                        </p>
+                    )}
                 </div>
             </form>
         </div>
