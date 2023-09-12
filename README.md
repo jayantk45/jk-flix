@@ -34,6 +34,9 @@
 - TMDB image CDN URL
 - Made the browse page amazing with Tailwind CSS
 - Made all Genres custom Hooks and displayed them
+- GPT search Feature
+- GPT Search Bar
+- Multi-language feature in our app.
 
 # Features
 

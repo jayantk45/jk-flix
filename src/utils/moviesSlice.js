@@ -9,7 +9,7 @@ const moviesSlice = createSlice({
     },
     reducers: {
         addTrailerVideo: (state, action) => {
-            state.trailerVideo = action.payload;
+            state.trailerVideo = action.payload;  // initial state sobat je karaycha aahe te ithe lihito
         },
 
         addNowPlayingMovies: (state, action) => {
