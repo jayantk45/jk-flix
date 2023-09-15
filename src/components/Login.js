@@ -8,6 +8,7 @@ import {
 import { auth } from "../utils/firebase";
 import { updateProfile } from "firebase/auth";
 import { BG_URL, USER_AVATAR } from "../utils/constants"
+import Footer from "./Footer";
 
 const Login = () => {
     const [isSignInForm, setIsSignInForm] = useState(true);
@@ -82,7 +83,7 @@ const Login = () => {
             <Header></Header>
 
             <div className=" absolute ">
-                <img
+                <img className=" h-screen object-cover md:w-screen"
                     src={BG_URL}
                     alt="bg"
                 />
@@ -90,7 +91,7 @@ const Login = () => {
 
             <form
                 onSubmit={(e) => e.preventDefault()}
-                className=" relative mx-auto right-0 left-0 top-28 w-3/12  p-12 bg-black text-white rounded-lg bg-opacity-75"
+                className=" relative mx-auto right-0 left-0 top-28 w-[90%] md:w-3/12  p-12 bg-black text-white rounded-lg bg-opacity-75"
             >
                 <h1 className=" font-bold text-3xl py-4 text-white">
                     {isSignInForm ? "Sign In" : "Sign Up"}
@@ -141,6 +142,9 @@ const Login = () => {
                     )}
                 </div>
             </form>
+
+            <Footer></Footer>
+
         </div>
     );
 };

@@ -23,7 +23,7 @@ const GptSearchBar = () => {
     }
 
     const handleGptSearchClick = async () => {
-        console.log(searchText.current.value);
+        // console.log(searchText.current.value);
 
         //MAke an API call to GPT API and get movie Results
 
@@ -40,7 +40,7 @@ const GptSearchBar = () => {
             // error handle karo
             <p>No results found☹️</p>
         }
-        console.log(gptResults.choices?.[0]?.message.content);
+        // console.log(gptResults.choices?.[0]?.message.content);
         // 'Andaz Apna Apna, Chupke Chupke, Jaane Bhi Do Yaaro, Padosan, Angoor'
         const gptMovies = gptResults.choices?.[0]?.message.content.split(",")
 
@@ -51,14 +51,14 @@ const GptSearchBar = () => {
         // [Promise, Promise, Promise, Promise, Promise]
 
         const tmbdResults = await Promise.all(promiseArray);
-        console.log(tmbdResults);
+        // console.log(tmbdResults);
 
         dispatch(addGptMovieResult({ movieNames: gptMovies, movieResults: tmbdResults }));
     }
 
     return (
-        <div className="pt-[10%] flex justify-center">
-            <form className=" bg-black w-1/2 grid grid-cols-12" onSubmit={(e) => e.preventDefault()}>
+        <div className=" pt-[45%] md:pt-[10%] flex justify-center">
+            <form className=" bg-black w-full md:w-1/2 grid grid-cols-12" onSubmit={(e) => e.preventDefault()}>
                 <input ref={searchText} className=" p-4 m-4 col-span-9" type="text" placeholder={lang[langKey].gptSearchPlaceholder} />
                 <button className=" py-2 px-4 col-span-3 m-4 bg-red-600 hover:bg-red-500 text-white rounded-lg" onClick={handleGptSearchClick}>{lang[langKey].search}</button>
             </form>
