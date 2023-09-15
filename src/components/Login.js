@@ -91,9 +91,9 @@ const Login = () => {
 
             <form
                 onSubmit={(e) => e.preventDefault()}
-                className=" relative mx-auto right-0 left-0 top-[4.1rem] md:top-[7rem] w-[90%] md:w-3/12 px-7 md:px-8 md:py-0 bg-black text-white rounded-lg bg-opacity-80"
+                className=" relative mx-auto right-0 left-0 top-44 md:top-[7rem] w-[90%] md:w-3/12 px-7 md:px-8 md:py-0 bg-black text-white rounded-lg bg-opacity-80"
             >
-                <h1 className=" font-bold text-lg md:text-3xl py-1 md:py-4 text-white">
+                <h1 className=" font-bold text-3xl md:text-4xl py-7 md:py-8 text-white">
                     {isSignInForm ? "Sign In" : "Sign Up"}
                 </h1>
 
@@ -102,7 +102,7 @@ const Login = () => {
                         ref={name}
                         type="text"
                         placeholder="Full Name"
-                        className=" p-[0.7rem] md:p-4 my-2 md:my-4 w-full bg-gray-700"
+                        className=" p-[1.5rem] md:p-4 my-2 md:my-4 w-full bg-gray-700"
                     />
                 )}
 
@@ -110,25 +110,25 @@ const Login = () => {
                     ref={email}
                     type="email"
                     placeholder="Email Address"
-                    className=" p-[0.7rem] md:p-4 my-4 w-full bg-gray-700"
+                    className=" p-[1.5rem] md:p-4 my-4 w-full bg-gray-700"
                 />
                 <input
                     ref={password}
                     type="password"
                     placeholder="Password"
-                    className=" p-[0.7rem] md:p-4 my-4 w-full bg-gray-700"
+                    className=" p-[1.5rem] md:p-4 my-4 w-full bg-gray-700"
                 />
 
                 <p className=" text-red-600">{errorMessage}</p>
 
                 <button
-                    className=" py-3 md:py-4 my-3 md:my-6 bg-red-700 text-white w-full rounded-lg"
+                    className=" py-4 md:py-4 my-3 md:my-6 bg-red-700 text-white w-full rounded-lg"
                     onClick={handleButtonClick}
                 >
                     {isSignInForm ? "Sign In" : "Sign Up"}
                 </button>
 
-                <div className=" py-2 md:py-4 " onClick={toggleSignInForm}>
+                <div className=" py-4 md:py-5 " onClick={toggleSignInForm}>
                     {isSignInForm ? (
                         <p className=" text-gray-500 ">
                             New to Netflix?{" "}
